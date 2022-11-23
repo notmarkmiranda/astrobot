@@ -4,12 +4,10 @@ require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
 
-greeting="<h1>Hello From Ruby on Fly!</h1>"
-
 get '/' do
-  greeting
+  "<p>AstrologyBot here, all is well</p>"
 end
 
 get '/:name' do
-  greeting+"</br>and hello to #{params[:name]}"
+  "<p>Are you here to get your horoscope, #{params[:name]}</p>"
 end
