@@ -3,11 +3,21 @@
 require 'rubygems'
 require 'bundler/setup'
 require 'sinatra'
+require 'sinatra/reloader' if development?
+require 'net/http'
+require 'json'
+
+before do
+  content_type 'application/json'
+end
 
 get '/' do
-  "<p>AstrologyBot here, all is well</p>"
+  { message: "hey, everything is okay!" }.to_json
 end
 
-get '/:name' do
-  "<p>Are you here to get your horoscope, #{params[:name]}</p>"
+get '/horoscope' do
+  uri = URI('https://any.ge/horoscope/api/?sign=cancer&type=daily&day=today&lang=en')
+  api_call = Net::HTTP.get(uri)
+  { message: JSON.parse(api_call).first["text"] }.to_json
 end
+
