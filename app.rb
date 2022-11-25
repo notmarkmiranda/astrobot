@@ -14,6 +14,7 @@ before do
 end
 
 get '/' do
+  status 418
   { message: "hey, everything is okay!" }.to_json
 end
 
@@ -25,6 +26,7 @@ post '/horoscope' do
   else
     "Hey dummy, that's not a proper zodiac sign. Reach out to Mike Cassano if you need help figuring out what they are. He's an astrological expert!"
   end
+  status 200
   { text: "#{params[:text].upcase}: #{response}", response_type: "in_channel" }.to_json
 end
 
